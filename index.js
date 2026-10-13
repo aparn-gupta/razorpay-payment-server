@@ -58,6 +58,17 @@ app.post("/order", async (req, res) => {
 
 })
 
+
+
+app.post('/api/payment/callback', express.urlencoded({ extended: true }), (req, res) => {
+    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
+
+    console.log(razorpay_payment_id, razorpay_order_id, razorpay_signature)
+
+
+    res.redirect(`https://ecommerce-dashboard-rosy-seven.vercel.app/payment-success?payment_id=${razorpay_payment_id}`);
+});
+
 const PORT = 5002
 
 app.listen(PORT, () => {
